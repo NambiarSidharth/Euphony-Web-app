@@ -35,8 +35,6 @@ export class Navigation extends Component {
           console.log(err)
         })
       
-    }else{
-      history.push("/dashboard")
     }
   }
   render() {
