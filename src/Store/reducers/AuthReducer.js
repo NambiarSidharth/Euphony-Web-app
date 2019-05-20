@@ -1,9 +1,11 @@
 import {SET_CURRENT_USER} from '../actions/types';
 import {appConfig} from '../../utils/constant';
 import {UserSession} from 'blockstack';
+import * as blockstack from 'blockstack';
 const initialState={
     userSession:new UserSession({appConfig}),
-    user:null
+    user:null,
+    blockstack:blockstack
 }
 export default function(state=initialState,action){
     switch(action.type){

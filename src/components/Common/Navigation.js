@@ -13,6 +13,7 @@ export class Navigation extends Component {
   componentDidMount= async()=>{
     const {userSession} = this.props.auth;
     const {history} = this.props;
+    console.log(userSession.isUserSignedIn(),userSession.isSignInPending())
     if(!userSession.isUserSignedIn() && userSession.isSignInPending()){
       userSession.handlePendingSignIn()
         .then(userData=>{
@@ -20,7 +21,7 @@ export class Navigation extends Component {
             throw new Error('This app requires username')
           }
           console.log(userData)
-          this.props.setCurrentUser()
+          this.props.setCurrentUser(userData)
 
           history.push("/dashboard")
         })
@@ -28,16 +29,23 @@ export class Navigation extends Component {
           console.log(err)
         })
       
+    }else{
+      history.push("/dashboard")
     }
   }
   render() {
+    const {userSession} = this.props.auth;
     return (
       <div>
       <Navbar bg="dark" variant="dark">
       <Navbar.Brand>Euphony</Navbar.Brand>
-      <Nav className="mr-auto">
+      {
+        (!userSession.isUserSignedIn())?<Nav className="mr-auto">
         <Button onClick={this.logInHandle}>Enter with Blockstack</Button>
-      </Nav>
+      </Nav>:<Nav className="mr-auto">
+      <Button onClick={this.logOutHandle}>Log Out</Button>
+    </Nav>
+    }
     </Navbar>
       </div>
     )
