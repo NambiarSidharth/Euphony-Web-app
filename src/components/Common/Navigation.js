@@ -10,6 +10,12 @@ export class Navigation extends Component {
     const {userSession} = this.props.auth;
     userSession.redirectToSignIn();
   }
+  logOutHandle=()=>{
+    const {userSession} = this.props.auth
+    userSession.signUserOut()
+    const {history}=this.props
+    history.push('/')
+  }
   componentDidMount= async()=>{
     const {userSession} = this.props.auth;
     const {history} = this.props;
