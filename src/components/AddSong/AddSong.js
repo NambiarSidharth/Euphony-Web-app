@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import ipfs from "../../utils/IPFS"
+import node from "../../utils/IPFS"
 
 export class AddSong extends Component {
     constructor(props) {
@@ -29,7 +29,7 @@ export class AddSong extends Component {
     };
 onSubmit = async (event) => {
         event.preventDefault();
-        await ipfs.add(this.state.buffer, (err, ipfsHash) => {
+        await node.add(this.state.buffer, (err, ipfsHash) => {
           console.log(err,ipfsHash);
           //setState by setting ipfsHash to ipfsHash[0].hash 
           this.setState({ ipfsHash:ipfsHash[0].hash });
