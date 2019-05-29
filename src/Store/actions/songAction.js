@@ -37,6 +37,17 @@ list.forEach(obj=>{
     }
 })
 }
+export const removeUserSong = (data,userData)=>dispatch=>{
+    const options = { encrypt: false }
+userData.putFile('my_songs.json',JSON.stringify(data),options)
+.then(obj=>{
+    dispatch({
+        type:GET_SONGS,
+        payload:data
+    })
+}
+)
+}
 export const addUserSong = (data,userData)=>dispatch=>{
 //add blockchain broadcast here
 //---

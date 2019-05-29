@@ -43,7 +43,12 @@ onSubmit = async (event) => {
       }; //onSubmit
   uploadMetaData = ()=>{
     const {fileData,ipfsHash}=this.state
+    const {userSession} = this.props.auth;
+    const {songs} = this.props.song;
+    let newsongs=songs
     console.log(fileData,ipfsHash)
+    let userdata=userSession.loadUserData()
+    console.log(userdata)
     let pushData = {
       lastModified:fileData.lastModified,
       name:fileData.name,
@@ -51,6 +56,8 @@ onSubmit = async (event) => {
       type:fileData.type,
       ipfsHash:ipfsHash
     }
+    newsongs.push(pushData)
+    // this.props.addUserSong(newsongs,userSession)
   }
   render() {
       const {ipfsHash} = this.state
@@ -68,7 +75,7 @@ onSubmit = async (event) => {
   }
 }
 AddSong.propTypes = {
-  auth:PropTypes.object.isrequired
+  auth:PropTypes.object.isRequired
 }
 const mapStateToProps = state=>({
   auth:state.auth,

@@ -1,12 +1,19 @@
 import React, { Component } from 'react'
 import {connect} from 'react-redux'
-import {getUserSongs} from "../../Store/actions/songAction"
+import {getUserSongs,removeUserSong} from "../../Store/actions/songAction"
 import PropTypes from "prop-types"
-import {Card} from "react-bootstrap"
+import {Card, Button} from "react-bootstrap"
 export class SongsList extends Component {
   componentDidMount(){
     const {userSession} = this.props.auth
     this.props.getUserSongs(userSession)
+  }
+  removeSong(key){
+    const {userSession} = this.props.auth
+    const {songs} = this.props.song;
+    let newSongList=songs
+    newSongList.splice(key,1)
+    this.props.removeUserSong(newSongList,userSession)
   }
   render() {
     const {songs} = this.props.song
@@ -17,8 +24,11 @@ export class SongsList extends Component {
     else{
       console.log(songs)
       view = songs.map((obj,i)=>{
-        return <Card>
-        {i}
+        return <Card key={i}>
+        <Card.Body>
+        {obj.name}
+        <Button variant="danger" onClick={this.removeSong.bind(this,i)}>Remove</Button>
+        </Card.Body>
         </Card> 
       })
     }
@@ -36,4 +46,4 @@ const mapStateToProps = state=>({
   song:state.song,
   auth:state.auth
 })
-export default connect(mapStateToProps,{getUserSongs})(SongsList)
+export default connect(mapStateToProps,{getUserSongs,removeUserSong})(SongsList)
