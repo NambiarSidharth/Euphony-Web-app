@@ -1,17 +1,15 @@
-import ipfs from "../../utils/IPFS"
-
-export const addSong=(data)=>{
-
-}
-
-export const getSongs = ()=>{
+import node from "../../utils/IPFS"
+//universal list for all songs existing
+export const getSongs = (userSession)=>dispatch=>{
 
 }
-
-export const getSongsByGenre = ()=>{
+export const getSongsByGenre =()=>dispatch=>{
 
 }
-export const getSong = (ipfsHash)=>{
+export const getSong = ()=>dispatch=>{
 
+}
+//blockchain thing
+export const allsongs = ()=>dispatch=>{
 
 }
