@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import {connect} from 'react-redux'
 import {getUserSongs,removeUserSong} from "../../Store/actions/songAction"
 import PropTypes from "prop-types"
+import {Link} from "react-router-dom"
 import {Card, Button} from "react-bootstrap"
 export class SongsList extends Component {
   componentDidMount(){
@@ -15,7 +16,7 @@ export class SongsList extends Component {
     newSongList.splice(key,1)
     this.props.removeUserSong(newSongList,userSession)
   }
-  render() {
+  render(){
     const {songs} = this.props.song
     let view
     if(songs.length===0){
@@ -26,7 +27,9 @@ export class SongsList extends Component {
       view = songs.map((obj,i)=>{
         return <Card key={i}>
         <Card.Body>
+        <Link to={`/song/${obj.name}`}>
         {obj.name}
+        </Link>
         <Button variant="danger" onClick={this.removeSong.bind(this,i)}>Remove</Button>
         </Card.Body>
         </Card> 

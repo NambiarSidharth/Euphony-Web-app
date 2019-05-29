@@ -29,7 +29,7 @@ export const getSongsByGenre =()=>dispatch=>{
 export const getSong = (identifier,list)=>dispatch=>{
 //searching through the list
 list.forEach(obj=>{
-    if(obj.id===identifier){
+    if(obj.name===identifier){
         dispatch({
             type:GET_SONG,
             payload:obj

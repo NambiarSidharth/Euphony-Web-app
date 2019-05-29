@@ -54,10 +54,12 @@ onSubmit = async (event) => {
       name:fileData.name,
       size:fileData.size,
       type:fileData.type,
-      ipfsHash:ipfsHash
+      ipfsHash:ipfsHash,
+      username:userdata.username,
+      userName:userdata.profile.name
     }
     newsongs.push(pushData)
-    // this.props.addUserSong(newsongs,userSession)
+    this.props.addUserSong(newsongs,userSession)
   }
   render() {
       const {ipfsHash} = this.state
