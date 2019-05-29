@@ -1,8 +1,18 @@
 import React, { Component } from 'react'
 import {connect} from "react-redux"
 import {getSong} from "../../Store/actions/songAction"
+import ReactPlayer from 'react-player'
 import PropTypes from "prop-types"
 export class Song extends Component {
+    constructor(props) {
+      super(props)
+    
+      this.state = {
+         start:false,
+         like:false
+      };
+    };
+    
     componentDidMount(){
      let songid=this.props.match.params.songid;
      const {songs} = this.props.song
@@ -12,7 +22,7 @@ export class Song extends Component {
         return (
             <div>
             <h1>songs baby</h1>
-            <audio>hello world</audio>
+            <ReactPlayer url='https://soundcloud.com/polo-g/polo-g-feat-lil-tjay-pop-out' controls="true" />
             </div>
         )
     }
