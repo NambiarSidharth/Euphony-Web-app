@@ -2,20 +2,22 @@ import node from "../../utils/IPFS"
 import {GET_SONGS,GET_SONG} from "./types"
 //universal list for all songs existing
 export const getUserSongs = (userSession)=>dispatch=>{
+    //getting users from blockchain
+    let songs
     const options = { decrypt: false };
         userSession.getFile(`my_songs.json`, options)
         .then((content) => {
             console.log(content)
           if(content) {
-            posts = JSON.parse(content)
+            songs = JSON.parse(content)
 
           } else {
-            posts =[] 
+            songs =[] 
           }
-          console.log(posts)
+          console.log(songs)
         dispatch({
             type:GET_SONGS,
-            payload:posts
+            payload:songs
         })
         }).catch(err=>{
             console.log(err)
@@ -25,6 +27,7 @@ export const getSongsByGenre =()=>dispatch=>{
 
 }
 export const getSong = (identifier,list)=>dispatch=>{
+//searching through the list
 list.forEach(obj=>{
     if(obj.id===identifier){
         dispatch({
@@ -36,6 +39,7 @@ list.forEach(obj=>{
 }
 export const addUserSong = (data,userData)=>dispatch=>{
 //add blockchain broadcast here
+//---
 const options = { encrypt: false }
 userData.putFile('my_songs.json',JSON.stringify(data),options)
 .then(obj=>{
@@ -47,6 +51,7 @@ userData.putFile('my_songs.json',JSON.stringify(data),options)
 }
 //blockchain thing
 export const allsongs = ()=>dispatch=>{
+//call from blockchain directly
 
 }
 
