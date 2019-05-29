@@ -20,7 +20,7 @@ export class Song extends Component {
 
 Song.propTypes = {
     song:PropTypes.object.isRequired,
-    getSong:PropTypes.func.isrequired
+    getSong:PropTypes.func.isRequired
 }
 const mapStateToProps = state=>({
     song:state.song

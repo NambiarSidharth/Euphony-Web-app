@@ -15,9 +15,11 @@ function App() {
     <div className="App">
     <Navigation />
       <Route exact path="/" component={Landing}/>
+      <div className="container">
       <Route exact path="/dashboard" component={Dashboard}/>
       <Route exact path="/addSong" component={AddSong}/>
       <Route exact path="/song/:songid" component={Song}/>
+    </div>
     </div>
     </Router>
   );
