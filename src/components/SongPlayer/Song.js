@@ -12,15 +12,13 @@ export class Song extends Component {
          like:false
       };
     };
-    // pullSong = async (song)=>{
-    //     console.log(songS)
-    //     node.once('ready',()=>{
-    //         node.cat(song.ipfsHash,(err,data)=>{
-                
-    //             console.log(data)
-    //         })
-    //     })  
-    // }
+    pullSong = async (song)=>{
+        // console.log(song)
+       
+            node.get(song.ipfsHash,(err,data)=>{ 
+                console.log(data)
+            })
+    }
     componentDidMount(){
      let songid=this.props.match.params.songid;
      const {songs} = this.props.song
@@ -31,13 +29,13 @@ export class Song extends Component {
         const {song} = this.props.song;
         if(song){
             console.log(song)
+            this.pullSong(song)
         }
-        // let view
-        // if()
+        
         return (
             <div>
             <h1>songs baby</h1>
-            {song?<ReactPlayer url={`https://ipfs.io/ipfs/${song.ipfsHash}`} controls="true" />:<p>Loading...</p>}
+            {song?<ReactPlayer url={`https://ipfs.infura.io/ipfs/${song.ipfsHash}`} controls="true" />:<p>Loading...</p>}
             </div>
         )
     }
