@@ -24,7 +24,6 @@ export class Song extends Component {
      const {songs} = this.props.song
      this.props.getSong(songid,songs)
     }
-
     render() {
         const {song} = this.props.song;
 

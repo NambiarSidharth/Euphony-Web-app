@@ -1,5 +1,5 @@
 import node from "../../utils/IPFS"
-import {GET_SONGS,GET_SONG} from "./types"
+import {GET_SONGS,GET_SONG,GET_MT_SONGS,GET_TRENDING_SONGS} from "./types";
 import {url} from "../../utils/apiRef";
 import axios from "axios"
 //universal list for all songs existing
@@ -39,6 +39,33 @@ list.forEach(obj=>{
     }
 })
 }
+export const getTrendingSongs= ()=>dispatch=>{
+    axios.get(url+"/state/trending",(req,res)=>{
+
+    }).then(obj=>{
+        dispatch({
+            type:GET_TRENDING_SONGS,
+            payload:obj.data
+        })
+    })
+    .catch(err=>{
+        console.log(err)
+    })
+}
+export const getMTSongs= ()=>dispatch=>{
+    axios.get(url+"/state/mt",(req,res)=>{
+
+    }).then(obj=>{
+        dispatch({
+            type:GET_MT_SONGS,
+            payload:obj.data
+        })
+    })
+    .catch(err=>{
+        console.log(err)
+    })
+}
+
 export const removeUserSong = (data,userData)=>dispatch=>{
     const options = { encrypt: false }
 userData.putFile('my_songs.json',JSON.stringify(data),options)
