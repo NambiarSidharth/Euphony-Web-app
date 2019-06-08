@@ -3,7 +3,7 @@ import node from "../../utils/IPFS"
 import {addUserSong} from "../../Store/actions/songAction"
 import {connect} from "react-redux"
 import PropTypes from "prop-types"
-
+import axios from "axios";
 export class AddSong extends Component {
     constructor(props) {
       super(props)
@@ -21,6 +21,7 @@ export class AddSong extends Component {
         event.stopPropagation()
         event.preventDefault()
         const file = event.target.files[0]
+        console.log(file,event.target.files)
         this.setState({fileData:file})
         let reader = new window.FileReader()
         reader.readAsArrayBuffer(file)
@@ -34,10 +35,20 @@ export class AddSong extends Component {
     };
 onSubmit = async (event) => {
         event.preventDefault();
+        // let data=new FormData()
+        // data.append('file',this.state.fileData)
+        // axios.post("https://ipfs.infura.io:5001/api/v0/add?pin=false",data)
+        // .then(obj=>{
+        //   console.log(obj)
+        // })
+        // .catch(err=>{
+        //   console.log(err)
+        // })
         await node.add(this.state.buffer, (err, ipfsHash) => {
           console.log(err,ipfsHash);
           //setState by setting ipfsHash to ipfsHash[0].hash 
           this.setState({ ipfsHash:ipfsHash[0].hash });
+          console.log("added to the ipfs network")
           this.uploadMetaData()
         }) //await ipfs.add 
       }; //onSubmit

@@ -47,6 +47,8 @@ export class Navigation extends Component {
         (!userSession.isUserSignedIn())?<Nav className="mr-auto">
         <Button onClick={this.logInHandle}>Enter with Blockstack</Button>
       </Nav>:<Nav className="mr-auto">
+      <Link to={`/dashboard`}>Dashboard</Link>
+      <Link to={`/explore`}>Explore Songs</Link>
       <Button onClick={this.logOutHandle}>Log Out</Button>
     </Nav>
     }

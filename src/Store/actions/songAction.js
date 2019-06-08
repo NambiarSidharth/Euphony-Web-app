@@ -1,5 +1,7 @@
 import node from "../../utils/IPFS"
 import {GET_SONGS,GET_SONG} from "./types"
+import {url} from "../../utils/apiRef";
+import axios from "axios"
 //universal list for all songs existing
 export const getUserSongs = (userSession)=>dispatch=>{
     //getting users from blockchain
@@ -48,21 +50,47 @@ userData.putFile('my_songs.json',JSON.stringify(data),options)
 }
 )
 }
+
 export const addUserSong = (data,userData)=>dispatch=>{
 //add blockchain broadcast here
 //---
 const options = { encrypt: false }
-userData.putFile('my_songs.json',JSON.stringify(data),options)
+let message={
+    type:"addSong",
+    payload:data[data.length-1]
+}
+// axios.post(url+"state",message)
+// .then(obj=>{
+    userData.putFile('my_songs.json',JSON.stringify(data),options)
 .then(obj=>{
     dispatch({
         type:GET_SONGS,
-        payload:data
+        payload:data 
     })
 })
+// })
+// .catch(err=>{
+//     console.log(err)
+// })
 }
+
 //blockchain thing
-export const allsongs = ()=>dispatch=>{
+export const allSongs = (username)=>dispatch=>{
 //call from blockchain directly
-
+let data={
+    type:"getSongs",
+    payload:{
+        userName:username
+    }
 }
-
+    axios.post(url+"state",data)
+    .then(obj=>{
+        dispatch({
+            type:GET_SONGS,
+            payload:obj.data.data
+        })
+    })
+    .catch(err=>{
+        console.log(err)
+    })
+} 

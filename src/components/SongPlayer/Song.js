@@ -14,9 +14,9 @@ export class Song extends Component {
     };
     pullSong = async (song)=>{
         // console.log(song)
-       
-            node.get(song.ipfsHash,(err,data)=>{ 
+            await node.get(song.ipfsHash,(err,data)=>{ 
                 console.log(data)
+                console.log(err)
             })
     }
     componentDidMount(){
@@ -27,15 +27,16 @@ export class Song extends Component {
 
     render() {
         const {song} = this.props.song;
+
         if(song){
             console.log(song)
             this.pullSong(song)
         }
-        
+
         return (
             <div>
             <h1>songs baby</h1>
-            {song?<ReactPlayer url={`https://ipfs.infura.io/ipfs/${song.ipfsHash}`} controls="true" />:<p>Loading...</p>}
+            {song?<ReactPlayer url={`https://ipfs.infura.io/ipfs/${song.ipfsHash}`} controls={true} />:<p>Loading...</p>}
             </div>
         )
     }
