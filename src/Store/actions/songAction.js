@@ -82,12 +82,13 @@ export const addUserSong = (data,userData)=>dispatch=>{
 //add blockchain broadcast here
 //---
 const options = { encrypt: false }
+console.log(data)
 let message={
     type:"addSong",
     payload:data[data.length-1]
 }
-// axios.post(url+"state",message)
-// .then(obj=>{
+axios.post(url+"/state",message)
+.then(obj=>{
     userData.putFile('my_songs.json',JSON.stringify(data),options)
 .then(obj=>{
     dispatch({
@@ -95,10 +96,10 @@ let message={
         payload:data 
     })
 })
-// })
-// .catch(err=>{
-//     console.log(err)
-// })
+})
+.catch(err=>{
+    console.log(err)
+})
 }
 
 //blockchain thing
@@ -110,7 +111,7 @@ let data={
         userName:username
     }
 }
-    axios.post(url+"state",data)
+    axios.post(url+"/state",data)
     .then(obj=>{
         dispatch({
             type:GET_SONGS,

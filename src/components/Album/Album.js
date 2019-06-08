@@ -10,76 +10,6 @@ import {connect} from "react-redux";
 import PropTypes from "prop-types";
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 import {getMTSongs,getTrendingSongs} from "../../Store/actions/songAction"
-// const styles = theme => ({
-//   root: {
-//     background: 'linear-gradient(45deg, #FE6B8B 30%, #FF8E53 90%)',
-//     borderRadius: 3,
-//     border: 0,
-//     color: 'white',
-//     height: 90,
-    
-//     justifyContent: 'center',
-//     padding: '0 30px',
-//     boxShadow: '0 2px 2px 1px rgba(255, 105, 135, .3)',
-//   },
-//   appBar: {
-//     position: 'relative',
-//   },
-//   icon: {
-//     marginRight: theme.spacing.unit * 2,
-//   },
-//   heroUnit: {
-//     backgroundColor: theme.palette.background.paper,
-//   },
-//   heroContent: {
-//     maxWidth: 600,
-//     margin: '0 auto',
-//     padding: `${theme.spacing.unit * 8}px 0 ${theme.spacing.unit * 6}px`,
-//   },
-//   heroButtons: {
-//     marginTop: theme.spacing.unit * 4,
-//   },
-//   layout: {
-//     width: 'auto',
-//     marginLeft: theme.spacing.unit * 3,
-//     marginRight: theme.spacing.unit * 3,
-//     [theme.breakpoints.up(1100 + theme.spacing.unit * 3 * 2)]: {
-//       width: 1100,
-//       marginLeft: 'auto',
-//       marginRight: 'auto',
-//     },
-//   },
-//   cardGrid: {
-//     padding: `${theme.spacing.unit * 8}px 0`,
-//   },
-//   card: {
-//     height: '100%',
-//     display: 'flex',
-//     flexDirection: 'column',
-//   },
-//   cardMedia: {
-//     paddingTop: '56.25%', // 16:9
-//   },
-//   cardContent: {
-//     flexGrow: 1,
-//   },
-//   footer: {
-//     backgroundColor: theme.palette.background.paper,
-//     padding: theme.spacing.unit * 6,
-//   },
-//   dividerFullWidth: {
-//     marginLeft: 130,
-//     marginRight: 130,
-//   },
-// });
-
-// const cards = [1, 2, 3, 4];
-
-// function Album(props) {
-//   const { classes } = props;
-
- 
-// }
 
 
 export class Album extends Component {
@@ -100,7 +30,8 @@ export class Album extends Component {
     this.props.getTrendingSongs();   
     }
     render() {
-        const {trending,monthlytop} = this.props.songs;
+        const {trending,monthlytop} = this.props.song;
+        
         return (
             <React.Fragment>
                   <header>
@@ -132,12 +63,16 @@ export class Album extends Component {
                 <Typography gutterBottom variant="h5" component="h2">Trending</Typography>
                 </div>
                 <Divider variant="middle" />
-                <TrendingList trending={trending}/>
+                {
+                <TrendingList className="mv2" trending={trending}/>
+                }
                 <div>
                 <Typography gutterBottom variant="h5" component="h2">Monthly Top</Typography>
                 </div>
                 <Divider variant="middle"/>
-                <MTList mt={monthlytop}/>
+                {
+                <MTList className="mv2" mt={monthlytop}/>
+                }
               </main>
               {/* Footer */}
               <footer>
@@ -155,13 +90,14 @@ export class Album extends Component {
 }
 
 Album.propTypes= {
-    songs:PropTypes.object.isRequired,
+    song:PropTypes.object.isRequired,
     getMTSongs:PropTypes.func.isRequired,
     getTrendingSongs:PropTypes.func.isRequired
 }
 
 const mapStateToProps = state=>({
-    songs:state.songs
+    song:state.song,
+    auth:state.auth
 })
 
 export default connect(mapStateToProps,{getMTSongs,getTrendingSongs})(Album);

@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import {Card,Button} from 'react-bootstrap'
 import {connect} from "react-redux"
+import {Link} from "react-router-dom"
 import {allSongs} from "../../Store/actions/songAction"
 import PropTypes from "prop-types" 
 class ExploreSongs extends Component {
@@ -15,7 +16,7 @@ class ExploreSongs extends Component {
             view = songs.map((obj,i)=>{
                 return <Card>
                 <Card.Body>
-                {obj.name}
+                <Link to={`/song/${obj.name}`}>{obj.name}</Link>
                 </Card.Body>
                 </Card>
             })
@@ -24,6 +25,11 @@ class ExploreSongs extends Component {
         }
         return (
             <div>
+            <div className="row">
+            <div>
+            Create stuffs
+            </div>
+            </div>
                 {view}
             </div>
         )

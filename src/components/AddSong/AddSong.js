@@ -2,7 +2,9 @@ import React, { Component } from 'react'
 import node from "../../utils/IPFS"
 import {addUserSong} from "../../Store/actions/songAction"
 import {connect} from "react-redux"
-import PropTypes from "prop-types"
+import {Card,Button} from "react-bootstrap";
+import {Link} from "react-router-dom";
+import PropTypes from "prop-types";
 import axios from "axios";
 export class AddSong extends Component {
     constructor(props) {
@@ -23,9 +25,11 @@ export class AddSong extends Component {
         const file = event.target.files[0]
         console.log(file,event.target.files)
         this.setState({fileData:file})
+        if(file){
         let reader = new window.FileReader()
         reader.readAsArrayBuffer(file)
-        reader.onloadend = () => this.convertToBuffer(reader)    
+        reader.onloadend = () => this.convertToBuffer(reader) 
+        }   
       };
  convertToBuffer = async(reader) => {
       //file is converted to a buffer for upload to IPFS
@@ -73,15 +77,30 @@ onSubmit = async (event) => {
     this.props.addUserSong(newsongs,userSession)
   }
   render() {
-      const {ipfsHash} = this.state
+      const {ipfsHash,fileData} = this.state
     return (
       <div>
-      <form onSubmit={this.onSubmit}>
-      <input type="file" onChange={this.captureFile} />
-        <button type="submit">submit</button>
+      <Card className="mt3">
+      <Card.Header>
+      Upload Your Song here
+      </Card.Header>
+      <Card.Body>
+      <form className="ma2" onSubmit={this.onSubmit}>
+      <input type="file" className="form-control" onChange={this.captureFile} />
+        <Button className="mt2 " variant="primary" type="submit">submit</Button>
       </form>
+      </Card.Body>
+      </Card>
+      { fileData?<Card className="mt2">
+        <Card.Body>
+        <p>Name: {fileData.name}</p>
+        <p>Size: {fileData.size}</p>
+        <p>type: {fileData.type}</p>
+        </Card.Body>
+        </Card>:null
+      }
       <div>
-        {ipfsHash!==''?<p>{ipfsHash}</p>:null}
+        {ipfsHash!==''?<p>uploaded with hash {ipfsHash}</p>:null}
       </div>
       </div>
     )
