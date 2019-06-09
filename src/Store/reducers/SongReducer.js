@@ -1,9 +1,10 @@
-import {GET_SONG,GET_SONGS,GET_TRENDING_SONGS,GET_MT_SONGS} from "../actions/types"
+import {GET_SONG,GET_SONGS,GET_TRENDING_SONGS,GET_MT_SONGS,EXPLORE_SONGS} from "../actions/types"
 const initialState={
     song:null,
     songs:[],
     trending:[],
     monthlytop:[],
+    explore:[],
     loading:false
 }
 
@@ -28,6 +29,11 @@ export default function(state=initialState,action){
             return {
                 ...state,
                 trending: action.payload
+            }
+        case EXPLORE_SONGS:
+            return {
+                ...state,
+                explore: action.payload
             }
         default:
             return state;

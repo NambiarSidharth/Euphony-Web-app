@@ -10,10 +10,10 @@ class ExploreSongs extends Component {
     }
     render() {
         let view;
-        const {songs,loading}= this.props.song;
-        if(songs){
-            console.log(songs)
-            view = songs.map((obj,i)=>{
+        const {explore,loading}= this.props.song;
+        if(explore){
+            console.log(explore)
+            view = explore.map((obj,i)=>{
                 return <Card>
                 <Card.Body>
                 <Link to={`/song/${obj.name}`}>{obj.name}</Link>

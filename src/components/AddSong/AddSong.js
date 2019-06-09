@@ -39,15 +39,7 @@ export class AddSong extends Component {
     };
 onSubmit = async (event) => {
         event.preventDefault();
-        // let data=new FormData()
-        // data.append('file',this.state.fileData)
-        // axios.post("https://ipfs.infura.io:5001/api/v0/add?pin=false",data)
-        // .then(obj=>{
-        //   console.log(obj)
-        // })
-        // .catch(err=>{
-        //   console.log(err)
-        // })
+       
         await node.add(this.state.buffer, (err, ipfsHash) => {
           console.log(err,ipfsHash);
           //setState by setting ipfsHash to ipfsHash[0].hash 

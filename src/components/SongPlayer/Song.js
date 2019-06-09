@@ -1,9 +1,13 @@
 import React, { Component } from 'react'
 import {connect} from "react-redux"
-import {getSong} from "../../Store/actions/songAction"
+import {getSong,getSongByName,allSongs} from "../../Store/actions/songAction"
+import SongSuggestion from "./SongSuggestion";
+import YourSongs from "./YourSongs";
 import ReactPlayer from 'react-player'
 import PropTypes from "prop-types"
 import node from "../../utils/IPFS"
+
+
 export class Song extends Component {
     constructor(props) {
       super(props)
@@ -20,22 +24,36 @@ export class Song extends Component {
             })
     }
     componentDidMount(){
-     let songid=this.props.match.params.songid;
-     const {songs} = this.props.song
-     this.props.getSong(songid,songs)
+    let songid=this.props.match.params.songid;
+    const {songs} = this.props.song
+    //  this.props.getSong(songid,songs)
+    this.props.getSongByName(songid);
+    this.props.allSongs();
     }
     render() {
-        const {song} = this.props.song;
+        const {song,explore} = this.props.song;
 
         if(song){
             console.log(song)
             this.pullSong(song)
         }
-
         return (
             <div>
-            <h1>songs baby</h1>
-            {song?<ReactPlayer url={`https://ipfs.infura.io/ipfs/${song.ipfsHash}`} controls={true} />:<p>Loading...</p>}
+            <div className="mv3">
+            {song?<h3>{song.name}</h3>:null}
+            </div>
+            <div className="row">
+            <div className="col-md-8">
+            {song?<ReactPlayer url={`https://ipfs.infura.io/ipfs/${song.ipfsHash}`} playing={true} controls={true} />:<p>Loading...</p>}
+            </div>
+            <div className="col-md-4">
+            <div>
+            <h4>More Songs</h4>
+            </div>
+            <SongSuggestion songs={explore}/>
+            //Songs List more and more
+            </div>
+            </div>
             </div>
         )
     }
@@ -49,4 +67,4 @@ const mapStateToProps = state=>({
     song:state.song
 })
 
-export default connect(mapStateToProps,{getSong})(Song)
+export default connect(mapStateToProps,{getSong,getSongByName,allSongs})(Song)

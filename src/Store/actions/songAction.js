@@ -1,5 +1,5 @@
 import node from "../../utils/IPFS"
-import {GET_SONGS,GET_SONG,GET_MT_SONGS,GET_TRENDING_SONGS} from "./types";
+import {GET_SONGS,GET_SONG,GET_MT_SONGS,GET_TRENDING_SONGS,EXPLORE_SONGS} from "./types";
 import {url} from "../../utils/apiRef";
 import axios from "axios"
 //universal list for all songs existing
@@ -101,24 +101,32 @@ axios.post(url+"/state",message)
     console.log(err)
 })
 }
-
-//blockchain thing
-export const allSongs = (username)=>dispatch=>{
-//call from blockchain directly
-let data={
-    type:"getSongs",
-    payload:{
-        userName:username
-    }
-}
-    axios.post(url+"/state",data)
-    .then(obj=>{
+export const getSongByName=(name)=>dispatch=>{
+    axios.get(url+"/state/songs/"+name)
+    .then(res=>{
+        let redata=res.data.data;
         dispatch({
-            type:GET_SONGS,
-            payload:obj.data.data
+            type:GET_SONG,
+            payload:redata
         })
     })
     .catch(err=>{
-        console.log(err)
+
     })
+}
+
+//blockchain thing
+export const allSongs = ()=>dispatch=>{
+//call from blockchain directly
+axios.get(url+"/state/songs")
+.then(obj=>{
+    dispatch({
+        type:EXPLORE_SONGS,
+        payload:obj.data.data
+    })
+})
+.catch(err=>{
+    console.log(err)
+})
+
 } 
