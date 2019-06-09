@@ -14,9 +14,16 @@ class ExploreSongs extends Component {
         if(explore){
             console.log(explore)
             view = explore.map((obj,i)=>{
-                return <Card>
+                return <Card bg="dark" style={{float:"left",margin:"15px"}}>
                 <Card.Body>
-                <Link to={`/song/${obj.name}`}>{obj.name}</Link>
+                <Link to={`/song/${obj.name}`} className="text-success">{obj.name}</Link>
+                
+                <div className="row mt2">
+                <Button variant="outline-success" className="center">Download</Button>
+                </div>
+                <div className="row mt2">
+                <Button variant="outline-success" className="center">Add to Favourites</Button>
+                </div>
                 </Card.Body>
                 </Card>
             })
@@ -27,10 +34,10 @@ class ExploreSongs extends Component {
             <div>
             <div className="row">
             <div>
-            Create stuffs
+            {view}
             </div>
             </div>
-                {view}
+               
             </div>
         )
     }

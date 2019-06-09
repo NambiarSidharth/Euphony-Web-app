@@ -25,12 +25,19 @@ export class SongsList extends Component {
     else{
       console.log(songs)
       view = songs.map((obj,i)=>{
-        return <Card key={i}>
+        return <Card key={i} bg="dark" style={{float:"left",margin:"10px"}}>
         <Card.Body>
+        <div className="row">
         <Link to={`/song/${obj.name}`}>
         {obj.name}
         </Link>
-        <Button variant="danger" onClick={this.removeSong.bind(this,i)}>Remove</Button>
+        </div>
+        <div className="row mt2 center">
+        <Button variant="outline-danger" className="center" onClick={this.removeSong.bind(this,i)}>Remove</Button>
+        </div>
+        <div className="row mt2 center">
+        <Button variant="outline-success" className="center" onClick>add to Favourites</Button>
+        </div>
         </Card.Body>
         </Card> 
       })

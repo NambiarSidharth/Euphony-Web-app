@@ -43,13 +43,17 @@ export class Navigation extends Component {
       <div>
       <Navbar bg="dark" variant="dark">
       <Navbar.Brand>Euphony</Navbar.Brand>
+      
       {
         (!userSession.isUserSignedIn())?<Nav className="mr-auto">
         <Button onClick={this.logInHandle}>Enter with Blockstack</Button>
-      </Nav>:<Nav className="mr-auto">
-      <Link to={`/dashboard`}>Dashboard</Link>
-      <Link to={`/explore`}>Explore Songs</Link>
-      <Button onClick={this.logOutHandle}>Log Out</Button>
+      </Nav>:<Nav className="navbar align-content-end">
+      <div className="mr-auto" style={{marginLeft:"40rem"}}>
+      <Link to={`/dashboard`} className="mh2">Dashboard</Link>
+      <Link to={`/explore`} className="mh2">Explore Songs</Link>
+      <Link to="/addSong" className="btn btn-outline-success mh2">Add Song</Link>
+      </div>
+      <Button variant="outline-light" onClick={this.logOutHandle}>Log Out</Button>
     </Nav>
     }
     </Navbar>

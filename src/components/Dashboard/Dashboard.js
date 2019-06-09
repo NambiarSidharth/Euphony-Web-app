@@ -6,7 +6,7 @@ export class Dashboard extends Component {
     return (
       <div>
         <div className="row">
-        <Link to="/addSong" className="btn btn-info">Add Song</Link>
+        <h3>Dashboard</h3>
         </div>
         <div className="row mv2">
         <SongsList />

@@ -5,6 +5,7 @@ const initialState={
     trending:[],
     monthlytop:[],
     explore:[],
+    favourites:[],
     loading:false
 }
 

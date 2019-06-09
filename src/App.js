@@ -9,7 +9,7 @@ import ExploreSongs from "./components/MySongsList/ExploreSongs";
 import Album from "./components/Album/Album";
 import {connect} from "react-redux";
 import './R.css';
-
+import "tachyons";
 import PropTypes from "prop-types"
 import './App.css';
 
