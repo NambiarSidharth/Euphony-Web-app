@@ -15,7 +15,7 @@ class ExploreSongs extends Component {
             console.log(files)
             console.log(err)
             if(!err){
-                let name1=name+".mp3"
+                let name1=name
                 fileDownload(files[0].content,name1)
             }
         })

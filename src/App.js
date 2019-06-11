@@ -7,6 +7,7 @@ import AddSong from "./components/AddSong/AddSong";
 import Song from "./components/SongPlayer/Song"; 
 import ExploreSongs from "./components/MySongsList/ExploreSongs";
 import Album from "./components/Album/Album";
+import PrivateRoute from "./components/Common/PrivateRoute";
 import {connect} from "react-redux";
 import './R.css';
 import "tachyons";
@@ -21,10 +22,10 @@ function App() {
       <Route exact path="/" component={Landing}/>
       <div className="container">
       <Route exact path="/album" component={Album} />
-      <Route exact path="/dashboard" component={Dashboard}/>
-      <Route exact path="/addSong" component={AddSong}/>
-      <Route exact path="/song/:songid" component={Song}/>
-      <Route exact path="/explore" component={ExploreSongs} />
+      <PrivateRoute exact path="/dashboard" component={Dashboard}/>
+      <PrivateRoute exact path="/addSong" component={AddSong}/>
+      <PrivateRoute exact path="/song/:songid" component={Song}/>
+      <PrivateRoute exact path="/explore" component={ExploreSongs} />
     </div>
     </div>
     </Router>
