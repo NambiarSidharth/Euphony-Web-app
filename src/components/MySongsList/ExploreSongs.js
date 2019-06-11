@@ -14,9 +14,9 @@ class ExploreSongs extends Component {
         if(explore){
             console.log(explore)
             view = explore.map((obj,i)=>{
-                return <Card bg="dark" style={{float:"left",margin:"15px"}}>
+                return <Card style={{float:"left",margin:"15px"}}>
                 <Card.Body>
-                <Link to={`/song/${obj.name}`} className="text-success">{obj.name}</Link>
+                <Link to={`/song/${obj.name}`} className="text-dark">{obj.name}</Link>
                 
                 <div className="row mt2">
                 <Button variant="outline-success" className="center">Download</Button>

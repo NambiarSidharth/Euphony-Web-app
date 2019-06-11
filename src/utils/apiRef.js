@@ -1,2 +1,3 @@
-export const url = "http://localhost:3001"
+export const url = "https://tincture.herokuapp.com"
 //https://tincture.herokuapp.com/
+//http://localhost:3001

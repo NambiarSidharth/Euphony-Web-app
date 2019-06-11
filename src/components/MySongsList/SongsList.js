@@ -25,10 +25,10 @@ export class SongsList extends Component {
     else{
       console.log(songs)
       view = songs.map((obj,i)=>{
-        return <Card key={i} bg="dark" style={{float:"left",margin:"10px"}}>
+        return <Card key={i} style={{float:"left",margin:"10px",}}>
         <Card.Body>
         <div className="row">
-        <Link to={`/song/${obj.name}`}>
+        <Link to={`/song/${obj.name}`} className="text-dark"> 
         {obj.name}
         </Link>
         </div>

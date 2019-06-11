@@ -4,6 +4,7 @@ import {withRouter,Link} from "react-router-dom"
 import {connect} from "react-redux"
 import {setCurrentUser} from "../../Store/actions/authAction";
 import PropTypes from "prop-types"
+
 export class Navigation extends Component {
 
   logInHandle=()=>{
@@ -41,16 +42,16 @@ export class Navigation extends Component {
     const {userSession} = this.props.auth;
     return (
       <div>
-      <Navbar bg="dark" variant="dark">
-      <Navbar.Brand>Euphony</Navbar.Brand>
+      <Navbar style={{background:"linear-gradient(45deg, #FE6B8B 30%, #FF8E53 90%)"}}>
+      <Navbar.Brand className="text-light">Euphony</Navbar.Brand>
       
       {
         (!userSession.isUserSignedIn())?<Nav className="mr-auto">
         <Button onClick={this.logInHandle}>Enter with Blockstack</Button>
       </Nav>:<Nav className="navbar align-content-end">
       <div className="mr-auto" style={{marginLeft:"40rem"}}>
-      <Link to={`/dashboard`} className="mh2">Dashboard</Link>
-      <Link to={`/explore`} className="mh2">Explore Songs</Link>
+      <Link to={`/dashboard`} className="mh2 text-light">Dashboard</Link>
+      <Link to={`/explore`} className="mh2 text-light">Explore Songs</Link>
       <Link to="/addSong" className="btn btn-outline-success mh2">Add Song</Link>
       </div>
       <Button variant="outline-light" onClick={this.logOutHandle}>Log Out</Button>
