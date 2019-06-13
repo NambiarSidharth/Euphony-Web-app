@@ -23,9 +23,9 @@ function App() {
       <div className="container">
       <Route exact path="/album" component={Album} />
       <PrivateRoute exact path="/dashboard" component={Dashboard}/>
-      <PrivateRoute exact path="/addSong" component={AddSong}/>
-      <PrivateRoute exact path="/song/:songid" component={Song}/>
-      <PrivateRoute exact path="/explore" component={ExploreSongs} />
+      <Route exact path="/addSong" component={AddSong}/>
+      <Route exact path="/song/:songid" component={Song}/>
+      <Route exact path="/explore" component={ExploreSongs} />
     </div>
     </div>
     </Router>
